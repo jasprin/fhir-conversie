@@ -23,7 +23,7 @@ Naast de FHIR-versie zetten de mappings waar nodig ook het profiel om, bijvoorbe
 **Runtime.** De converter is een black box: een STU3-Bundle erin, een R4-Bundle eruit, in één aanroep.
 
 ```
-POST http://<host>:8090/transform?map=<canonical van de Bundle-map>
+POST http://<host>:8090/transform?map=http://medmij.nl/fhir/StructureMap/stu3-r4-Bundle
 Content-Type: application/fhir+json   (of application/fhir+xml)
 Accept:       application/fhir+json
 
@@ -68,7 +68,9 @@ docs/                ontwerp en architectuurplaat
 build/               gegenereerde StructureMaps (niet in Git)
 ```
 
-Naamgeving: een map voor een profiel heet naar het R4-profiel zonder voorvoegsel (`nl-core-LaboratoryTestResult` → `LaboratoryTestResult.map`); een map zonder profiel naar het resourcetype. De canonical van een map is `<basis>/StructureMap/<bestandsnaam zonder .map>`. Bestandsnamen en groepsnamen zijn uniek over alle maps.
+Naamgeving: een map voor een profiel heet naar het R4-profiel zonder voorvoegsel (`nl-core-LaboratoryTestResult` → `LaboratoryTestResult.map`); een map zonder profiel naar het resourcetype. Bestandsnamen en groepsnamen zijn uniek over alle maps.
+
+Canonical: `http://medmij.nl/fhir/StructureMap/stu3-r4-<bestandsnaam zonder .map>`, bijvoorbeeld `http://medmij.nl/fhir/StructureMap/stu3-r4-LaboratoryTestResult`. Dit volgt het MedMij-patroon `http://medmij.nl/fhir/<Resourcetype>/<id>`. Het voorvoegsel `stu3-r4-` houdt de namen uniek naast andere StructureMaps van MedMij.
 
 ## Gebruik
 
@@ -78,11 +80,11 @@ Naamgeving: een map voor een profiel heet naar het R4-profiel zonder voorvoegsel
 - Ongeveer 1,5 GB geheugen in servermodus
 - Netwerktoegang tot `packages.fhir.org` (bij de eerste start) en een terminologieserver (standaard `tx.fhir.org`); de Validator start geen transformatie zonder.
 
-Getest met Validator 7.0.2. Zet de versie vast; bij een update eerst de testset draaien.
+Gebruik de meest recente versie van de Validator. Draai na een update de testset.
 
 ```bash
 curl -L -o validator_cli.jar \
-  https://github.com/hapifhir/org.hl7.fhir.core/releases/download/7.0.2/validator_cli.jar
+  https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar
 ```
 
 ### Maps bouwen
@@ -90,12 +92,12 @@ curl -L -o validator_cli.jar \
 Per map: compileren in een R4-context en omzetten naar STU3-formaat.
 
 ```bash
-BASE=http://example.org/fhir/StructureMap   # canonical-basis van de maps
+PREFIX=http://medmij.nl/fhir/StructureMap/stu3-r4-   # canonical = voorvoegsel + mapnaam
 V="java -jar validator_cli.jar"
 
 for f in $(find maps -name '*.map'); do
   m=$(basename "$f" .map)
-  $V compile $BASE/$m -version 4.0 -ig "$f" -output build/r4/$m.json
+  $V compile $PREFIX$m -version 4.0 -ig "$f" -output build/r4/$m.json
   $V to-version 3.0 build/r4/$m.json -version 4.0 -do-native -output build/r3/$m.json
 done
 ```
@@ -105,7 +107,7 @@ Na een wijziging hoeven alleen de gewijzigde maps opnieuw gebouwd te worden.
 ### Converteren als bestand
 
 ```bash
-$V transform $BASE/Bundle tests/LaboratoryResults/input/bundle.json \
+$V transform ${PREFIX}Bundle tests/LaboratoryResults/input/bundle.json \
    -version 3.0 -ig hl7.fhir.xver.r3#1.2.1 -ig build/r3 \
    -output bundle-r4.json
 ```

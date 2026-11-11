@@ -1,0 +1,8 @@
+# Geheimen
+.env
+
+# Gegenereerde StructureMaps
+build/
+
+# Validator (lokaal gedownload)
+validator_cli.jar
