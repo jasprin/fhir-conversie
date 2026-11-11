@@ -79,8 +79,9 @@ Canonical: `http://medmij.nl/fhir/StructureMap/stu3-r4-<bestandsnaam zonder .map
 ### Vereisten
 
 - Java 17 of hoger
-- Ongeveer 1,5 GB geheugen in servermodus
-- Netwerktoegang tot `packages.fhir.org` (bij de eerste start) en een terminologieserver (standaard `tx.fhir.org`); de Validator start geen transformatie zonder.
+- Ongeveer 1 GB geheugen voor de Validator. Begrens de heap met `-Xmx1536m`; zonder die grens kan Java bij weinig vrij geheugen vastlopen.
+- Netwerktoegang tot `packages.fhir.org` bij de eerste start. Daarna komen de packages uit de lokale cache (`~/.fhir/packages`).
+- Voor bouwen en converteren op de command line: een terminologieserver (standaard `tx.fhir.org`). `transform` weigert te starten zonder. De HTTP-service heeft er geen nodig (`-tx n/a`).
 
 Gebruik de meest recente versie van de Validator. Draai na een update de testset.
 
@@ -95,7 +96,7 @@ Per map: compileren in een R4-context en omzetten naar STU3-formaat.
 
 ```bash
 PREFIX=http://medmij.nl/fhir/StructureMap/stu3-r4-   # canonical = voorvoegsel + mapnaam
-V="java -jar validator_cli.jar"
+V="java -Xmx1536m -jar validator_cli.jar"
 
 for f in $(find maps -name '*.map'); do
   m=$(basename "$f" .map)
@@ -103,6 +104,8 @@ for f in $(find maps -name '*.map'); do
   $V to-version 3.0 build/r4/$m.json -version 4.0 -do-native -output build/r3/$m.json
 done
 ```
+
+Bij `compile` is het eerste argument de canonical van de map; het `.map`-bestand gaat mee via `-ig`. Een STU3-context kan het bestand niet lezen (`Unsupported format`), daarom gebeurt het compileren met `-version 4.0`.
 
 Na een wijziging hoeven alleen de gewijzigde maps opnieuw gebouwd te worden.
 
@@ -117,21 +120,27 @@ $V transform ${PREFIX}Bundle tests/LaboratoryResults/input/bundle.json \
 ### Converteren als HTTP-service
 
 ```bash
-$V server 8090 -version 3.0 -ig hl7.fhir.xver.r3#1.2.1 -ig build/r3
+$V server 8090 -version 3.0 -tx n/a -ig hl7.fhir.xver.r3#1.2.1 -ig build/r3
 ```
 
-De service is na ongeveer 45 seconden beschikbaar. Een conversie duurt daarna ongeveer 0,1 seconde per Bundle. Na een nieuwe build de service herstarten om de nieuwe maps te laden.
+- `-tx n/a` maakt de service onafhankelijk van een terminologieserver. Zonder deze optie start de service niet als `tx.fhir.org` onbereikbaar is.
+- De service luistert standaard alleen op `localhost`. Voor toegang van buiten de machine, bijvoorbeeld in een container, is `-allowNetworkAccess` nodig.
+- Met een warme package-cache is de service na ongeveer 10 seconden beschikbaar; de eerste start duurt langer omdat de packages dan worden gedownload. Een conversie duurt daarna minder dan 0,1 seconde per Bundle.
+- Na een nieuwe build de service herstarten om de nieuwe maps te laden. Stoppen kan met `POST /stop`.
+- Documentatie van alle endpoints staat op `/docs` (OpenAPI: `/openapi.json`).
+
+Een aanroep zonder `map` geeft een OperationOutcome met de melding `Missing required query parameter: map`.
 
 ## Let op
 
-- **Niet-gemapte elementen verdwijnen zonder melding.** Valideer de uitvoer altijd tegen de profielen, bijvoorbeeld met `$V bundle-r4.json -version 4.0 -ig nictiz.fhir.nl.r4.zib2020`, en vergelijk met `tests/<gegevensdienst>/expected/`.
-- **Controleer of er uitvoer is.** De command line meldt "Successfully transformed", ook als een geïmporteerde map ontbreekt; er wordt dan geen uitvoerbestand geschreven.
-- **De servermodus heeft geen authenticatie,** en beheerendpoints als `/stop` en `/loadIG` staan open. Alleen gebruiken op een afgeschermd netwerk.
+- **Niet-gemapte elementen verdwijnen zonder melding.** Dat geldt ook voor hele resources: een entry waarvoor de Bundle-map geen regel heeft, komt in de uitvoer terug met alleen `fullUrl` en `search`, zonder `resource`. Valideer de uitvoer altijd tegen de profielen, bijvoorbeeld met `$V bundle-r4.json -version 4.0 -ig nictiz.fhir.nl.r4.zib2020`, en vergelijk met `tests/<gegevensdienst>/expected/`.
+- **Controleer of er uitvoer is.** `compile` en `transform` melden "Successfully compiled" of "Successfully transformed", ook als er iets misging, bijvoorbeeld als een map niet gevonden wordt. Er wordt dan geen uitvoerbestand geschreven. De echte fout staat eerder in de uitvoer (`...Failure:`).
+- **De servermodus heeft geen authenticatie,** en beheerendpoints als `/stop` en `/loadIG` staan open voor iedereen die de service kan bereiken. Gebruik `-allowNetworkAccess` alleen op een afgeschermd netwerk.
 - **Alleen synthetische testdata** in deze repository, geen patiëntgegevens.
 
 ## Bronnen
 
 - [FHIR Mapping Language](https://hl7.org/fhir/R4/mapping-language.html)
-- [HL7 FHIR Validator](https://github.com/hapifhir/org.hl7.fhir.core)
+- [HL7 FHIR Validator](https://github.com/hapifhir/org.hl7.fhir.core) en [Using the FHIR Validator](https://confluence.hl7.org/spaces/FHIR/pages/35718580/Using+the+FHIR+Validator). De ingebouwde hulp is actueler: `java -jar validator_cli.jar help <commando>`.
 - [Nictiz STU3 zib2017](https://simplifier.net/nictizstu3-zib2017) en [Nictiz R4 zib2020](https://simplifier.net/nictiz-r4-zib2020)
 - [Zibtranslate: translatiespecificaties zib2017 → zib2020](https://github.com/Nictiz/Zibtranslate)
