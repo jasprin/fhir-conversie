@@ -1,4 +1,4 @@
-# fhir-conversie-stu3-r4
+# Conversie van FHIR STU3 naar R4
 
 Converteert FHIR-resources van **STU3** naar **R4**, met mappings in de [FHIR Mapping Language](https://hl7.org/fhir/R4/mapping-language.html) (FML). Uitgevoerd door de [HL7 FHIR Validator](https://github.com/hapifhir/org.hl7.fhir.core).
 
