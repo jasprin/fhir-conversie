@@ -4,5 +4,7 @@
 # Gegenereerde StructureMaps
 build/
 
-# Validator (lokaal gedownload)
+# Validator (lokaal gedownload) en crashlogs van Java
 validator_cli.jar
+hs_err_pid*.log
+replay_pid*.log

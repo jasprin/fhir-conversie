@@ -1,0 +1,448 @@
+{
+  "resourceType" : "Bundle",
+  "id" : "laboratoryresults-kwalificatie1",
+  "type" : "searchset",
+  "total" : 3,
+  "link" : [{
+    "relation" : "self",
+    "url" : "https://xis.example.nl/fhir/Observation?category=http://snomed.info/sct|49581000146104"
+  }],
+  "entry" : [{
+    "fullUrl" : "https://xis.example.nl/fhir/Observation/laboratoryresults-observation1-hemoglobine",
+    "resource" : {
+      "resourceType" : "Observation",
+      "id" : "laboratoryresults-observation1-hemoglobine",
+      "meta" : {
+        "profile" : ["http://nictiz.nl/fhir/StructureDefinition/zib-LaboratoryTestResult-Observation"]
+      },
+      "identifier" : [{
+        "system" : "urn:oid:2.16.840.1.113883.2.4.3.11.999.7.6",
+        "value" : "3d314b9b-0423-11ec-1411-020000000000"
+      }],
+      "status" : "final",
+      "category" : [{
+        "coding" : [{
+          "system" : "http://snomed.info/sct",
+          "code" : "49581000146104",
+          "display" : "bevinding betreffende laboratoriumonderzoek"
+        }]
+      }],
+      "code" : {
+        "coding" : [{
+          "system" : "http://loinc.org",
+          "code" : "59261-8",
+          "display" : "Hemoglobine A1c/hemoglobine.totaal [stoffractie] in bloed d.m.v. IFCC-protocol"
+        }]
+      },
+      "subject" : {
+        "reference" : "Patient/laboratoryresults-patient-kwalificatie1",
+        "display" : "Alexandra XXX_Aantrekker"
+      },
+      "effectiveDateTime" : "2026-08-13",
+      "performer" : [{
+        "extension" : [{
+          "url" : "http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference",
+          "valueReference" : {
+            "reference" : "PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1",
+            "display" : "R.I.A. van Beek - Medisch specialisten, Klinische Chemie"
+          }
+        }],
+        "display" : "R.I.A. van Beek - Medisch specialisten, Klinische Chemie"
+      }],
+      "valueQuantity" : {
+        "value" : 60,
+        "unit" : "mmol/mol",
+        "system" : "http://unitsofmeasure.org",
+        "code" : "mmol/mol"
+      },
+      "interpretation" : {
+        "coding" : [{
+          "system" : "http://hl7.org/fhir/v2/0078",
+          "code" : "H",
+          "display" : "Hoog"
+        },
+        {
+          "system" : "http://snomed.info/sct",
+          "code" : "281302008",
+          "display" : "Boven referentiewaarde"
+        }]
+      },
+      "referenceRange" : [{
+        "low" : {
+          "value" : 20,
+          "unit" : "mmol/mol",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "mmol/mol"
+        },
+        "high" : {
+          "value" : 42,
+          "unit" : "mmol/mol",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "mmol/mol"
+        }
+      }]
+    },
+    "search" : {
+      "mode" : "match"
+    }
+  },
+  {
+    "fullUrl" : "https://xis.example.nl/fhir/Observation/laboratoryresults-observation2-bloodglucose",
+    "resource" : {
+      "resourceType" : "Observation",
+      "id" : "laboratoryresults-observation2-bloodglucose",
+      "meta" : {
+        "profile" : ["http://nictiz.nl/fhir/StructureDefinition/zib-LaboratoryTestResult-Observation"]
+      },
+      "identifier" : [{
+        "system" : "urn:oid:2.16.840.1.113883.2.4.3.11.999.7.6",
+        "value" : "3d5aa58b-0423-11ec-2751-020000000000"
+      }],
+      "status" : "final",
+      "category" : [{
+        "coding" : [{
+          "system" : "http://snomed.info/sct",
+          "code" : "49581000146104",
+          "display" : "bevinding betreffende laboratoriumonderzoek"
+        }]
+      }],
+      "code" : {
+        "coding" : [{
+          "system" : "http://loinc.org",
+          "code" : "14749-6",
+          "display" : "Glucose [mol/volume] in serum of plasma"
+        }]
+      },
+      "subject" : {
+        "reference" : "Patient/laboratoryresults-patient-kwalificatie1",
+        "display" : "Alexandra XXX_Aantrekker"
+      },
+      "effectiveDateTime" : "2026-08-13",
+      "performer" : [{
+        "extension" : [{
+          "url" : "http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference",
+          "valueReference" : {
+            "reference" : "PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1",
+            "display" : "R.I.A. van Beek - Medisch specialisten, Klinische Chemie"
+          }
+        }],
+        "display" : "R.I.A. van Beek - Medisch specialisten, Klinische Chemie"
+      }],
+      "valueQuantity" : {
+        "value" : 10,
+        "unit" : "mmol/l",
+        "system" : "http://unitsofmeasure.org",
+        "code" : "mmol/L"
+      },
+      "interpretation" : {
+        "coding" : [{
+          "system" : "http://hl7.org/fhir/v2/0078",
+          "code" : "H",
+          "display" : "Hoog"
+        },
+        {
+          "system" : "http://snomed.info/sct",
+          "code" : "281302008",
+          "display" : "Boven referentiewaarde"
+        }]
+      },
+      "referenceRange" : [{
+        "high" : {
+          "value" : 7.8,
+          "unit" : "mmol/l",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "mmol/L"
+        }
+      }]
+    },
+    "search" : {
+      "mode" : "match"
+    }
+  },
+  {
+    "fullUrl" : "https://xis.example.nl/fhir/Observation/laboratoryresults-observation1-albumine",
+    "resource" : {
+      "resourceType" : "Observation",
+      "id" : "laboratoryresults-observation1-albumine",
+      "meta" : {
+        "profile" : ["http://nictiz.nl/fhir/StructureDefinition/zib-LaboratoryTestResult-Observation"]
+      },
+      "identifier" : [{
+        "system" : "urn:oid:2.16.840.1.113883.2.4.3.11.999.7.6",
+        "value" : "3d80a41b-0423-11ec-1091-020000000000"
+      }],
+      "status" : "final",
+      "category" : [{
+        "coding" : [{
+          "system" : "http://snomed.info/sct",
+          "code" : "49581000146104",
+          "display" : "bevinding betreffende laboratoriumonderzoek"
+        }]
+      }],
+      "code" : {
+        "coding" : [{
+          "system" : "http://loinc.org",
+          "code" : "14957-5",
+          "display" : "Albumine [massa/volume] in urine d.m.v. detectielimiet <= 20 mg/L"
+        }]
+      },
+      "subject" : {
+        "reference" : "Patient/laboratoryresults-patient-kwalificatie1",
+        "display" : "Alexandra XXX_Aantrekker"
+      },
+      "effectiveDateTime" : "2026-08-13",
+      "performer" : [{
+        "extension" : [{
+          "url" : "http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference",
+          "valueReference" : {
+            "reference" : "PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1",
+            "display" : "R.I.A. van Beek - Medisch specialisten, Klinische Chemie"
+          }
+        }],
+        "display" : "R.I.A. van Beek - Medisch specialisten, Klinische Chemie"
+      }],
+      "valueQuantity" : {
+        "value" : 60,
+        "unit" : "mg/l",
+        "system" : "http://unitsofmeasure.org",
+        "code" : "mg/L"
+      },
+      "interpretation" : {
+        "coding" : [{
+          "system" : "http://hl7.org/fhir/v2/0078",
+          "code" : "H",
+          "display" : "Hoog"
+        },
+        {
+          "system" : "http://snomed.info/sct",
+          "code" : "281302008",
+          "display" : "Boven referentiewaarde"
+        }]
+      },
+      "referenceRange" : [{
+        "low" : {
+          "value" : 0,
+          "unit" : "mg/l",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "mg/L"
+        },
+        "high" : {
+          "value" : 20,
+          "unit" : "mg/l",
+          "system" : "http://unitsofmeasure.org",
+          "code" : "mg/L"
+        }
+      }]
+    },
+    "search" : {
+      "mode" : "match"
+    }
+  },
+  {
+    "fullUrl" : "https://xis.example.nl/fhir/Patient/laboratoryresults-patient-kwalificatie1",
+    "resource" : {
+      "resourceType" : "Patient",
+      "id" : "laboratoryresults-patient-kwalificatie1",
+      "meta" : {
+        "profile" : ["http://fhir.nl/fhir/StructureDefinition/nl-core-patient"]
+      },
+      "identifier" : [{
+        "system" : "http://fhir.nl/fhir/NamingSystem/bsn",
+        "_value" : {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+            "valueCode" : "masked"
+          }]
+        }
+      }],
+      "name" : [{
+        "text" : "Alexandra XXX_Aantrekker",
+        "family" : "XXX_Aantrekker",
+        "_family" : {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/humanname-own-name",
+            "valueString" : "XXX_Aantrekker"
+          }]
+        },
+        "given" : ["Alexandra",
+        "C"],
+        "_given" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+            "valueCode" : "BR"
+          }]
+        },
+        {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+            "valueCode" : "IN"
+          }]
+        }]
+      }],
+      "gender" : "female",
+      "_gender" : {
+        "extension" : [{
+          "url" : "http://nictiz.nl/fhir/StructureDefinition/code-specification",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/v3/AdministrativeGender",
+              "code" : "F",
+              "display" : "Vrouw"
+            }]
+          }
+        }]
+      },
+      "birthDate" : "1954-08-06",
+      "address" : [{
+        "line" : ["Knolweg 1003"],
+        "_line" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
+            "valueString" : "Knolweg"
+          },
+          {
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+            "valueString" : "1003"
+          }]
+        }],
+        "city" : "Stitswerd",
+        "postalCode" : "9999ZA"
+      }]
+    },
+    "search" : {
+      "mode" : "include"
+    }
+  },
+  {
+    "fullUrl" : "https://xis.example.nl/fhir/PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1",
+    "resource" : {
+      "resourceType" : "PractitionerRole",
+      "id" : "laboratoryresults-practitionerrole-kwalificatie1",
+      "meta" : {
+        "profile" : ["http://fhir.nl/fhir/StructureDefinition/nl-core-practitionerrole"]
+      },
+      "identifier" : [{
+        "system" : "urn:oid:2.16.840.1.113883.2.4.3.11.999.7.6",
+        "value" : "37eedc1c-0423-11ec-1277-020000000000"
+      }],
+      "practitioner" : {
+        "reference" : "Practitioner/laboratoryresults-practitioner-kwalificatie1",
+        "display" : "R.I.A. van Beek"
+      },
+      "organization" : {
+        "reference" : "Organization/laboratoryresults-organization-kwalificatie1",
+        "display" : "Universitair Medisch Centrum Lutjebroek"
+      },
+      "specialty" : [{
+        "coding" : [{
+          "system" : "urn:oid:2.16.840.1.113883.2.4.6.7",
+          "code" : "0386",
+          "display" : "Medisch specialisten, Klinische Chemie"
+        }]
+      }]
+    },
+    "search" : {
+      "mode" : "include"
+    }
+  },
+  {
+    "fullUrl" : "https://xis.example.nl/fhir/Practitioner/laboratoryresults-practitioner-kwalificatie1",
+    "resource" : {
+      "resourceType" : "Practitioner",
+      "id" : "laboratoryresults-practitioner-kwalificatie1",
+      "meta" : {
+        "profile" : ["http://fhir.nl/fhir/StructureDefinition/nl-core-practitioner"]
+      },
+      "identifier" : [{
+        "system" : "http://fhir.nl/fhir/NamingSystem/agb-z",
+        "value" : "03011234"
+      }],
+      "name" : [{
+        "extension" : [{
+          "url" : "http://hl7.org/fhir/StructureDefinition/humanname-assembly-order",
+          "valueCode" : "NL1"
+        }],
+        "text" : "R.I.A. van Beek",
+        "family" : "van Beek",
+        "_family" : {
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/humanname-own-prefix",
+            "valueString" : "van"
+          },
+          {
+            "url" : "http://hl7.org/fhir/StructureDefinition/humanname-own-name",
+            "valueString" : "Beek"
+          }]
+        },
+        "given" : ["R.I.A."],
+        "_given" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+            "valueCode" : "IN"
+          }]
+        }]
+      }],
+      "gender" : "female",
+      "_gender" : {
+        "extension" : [{
+          "url" : "http://nictiz.nl/fhir/StructureDefinition/code-specification",
+          "valueCodeableConcept" : {
+            "coding" : [{
+              "system" : "http://hl7.org/fhir/v3/AdministrativeGender",
+              "code" : "F",
+              "display" : "Vrouw"
+            }]
+          }
+        }]
+      }
+    },
+    "search" : {
+      "mode" : "include"
+    }
+  },
+  {
+    "fullUrl" : "https://xis.example.nl/fhir/Organization/laboratoryresults-organization-kwalificatie1",
+    "resource" : {
+      "resourceType" : "Organization",
+      "id" : "laboratoryresults-organization-kwalificatie1",
+      "meta" : {
+        "profile" : ["http://fhir.nl/fhir/StructureDefinition/nl-core-organization"]
+      },
+      "identifier" : [{
+        "system" : "http://fhir.nl/fhir/NamingSystem/ura",
+        "value" : "21870932"
+      },
+      {
+        "system" : "http://fhir.nl/fhir/NamingSystem/agb-z",
+        "value" : "06020899"
+      }],
+      "type" : [{
+        "coding" : [{
+          "system" : "http://nictiz.nl/fhir/NamingSystem/organization-type",
+          "code" : "V5",
+          "display" : "Universitair Medisch Centrum"
+        }]
+      }],
+      "name" : "Universitair Medisch Centrum Lutjebroek",
+      "address" : [{
+        "use" : "work",
+        "line" : ["Hoofdstraat 1"],
+        "_line" : [{
+          "extension" : [{
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
+            "valueString" : "Hoofdstraat"
+          },
+          {
+            "url" : "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+            "valueString" : "1"
+          }]
+        }],
+        "city" : "Lutjebroek",
+        "postalCode" : "9999ZZ"
+      }]
+    },
+    "search" : {
+      "mode" : "include"
+    }
+  }]
+}

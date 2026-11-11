@@ -12,6 +12,7 @@ Naast de FHIR-versie zetten de mappings waar nodig ook het profiel om, bijvoorbe
 |---|---|---|---|
 | Patient | `nl-core-patient` | `nl-core-Patient` | in ontwikkeling |
 | Practitioner | `nl-core-practitioner` | `nl-core-HealthProfessional-Practitioner` | in ontwikkeling |
+| PractitionerRole | `nl-core-practitionerrole` | `nl-core-HealthProfessional-PractitionerRole` | in ontwikkeling |
 | Organization | `nl-core-organization` | `nl-core-HealthcareProvider-Organization` | in ontwikkeling |
 | Observation | `zib-LaboratoryTestResult-Observation` | `nl-core-LaboratoryTestResult` | in ontwikkeling |
 | Specimen | `zib-LaboratoryTestResult-Specimen` | `nl-core-LaboratoryTestResult.Specimen` | in ontwikkeling |
@@ -59,6 +60,7 @@ maps/
   datatypes/         gedeelde regels (Coding.map, HumanName.map, Address.map, ...)
 tests/
   <gegevensdienst>/  per gegevensdienst, bijv. tests/LaboratoryResults/
+    nictiz/          ongewijzigd uitgangsmateriaal (kwalificatiemateriaal van Nictiz)
     input/           STU3-testberichten
     expected/        verwachte R4-uitvoer
 scripts/             bouwen, testen en valideren
