@@ -1,20 +1,20 @@
 # fhir-conversie-stu3-r4
 
-Converteert FHIR-resources van **STU3 volgens zib2017** naar **R4 volgens zib2020**, met mappings in de [FHIR Mapping Language](https://hl7.org/fhir/R4/mapping-language.html) (FML). Uitgevoerd door de [HL7 FHIR Validator](https://github.com/hapifhir/org.hl7.fhir.core).
+Converteert FHIR-resources van **STU3** naar **R4**, met mappings in de [FHIR Mapping Language](https://hl7.org/fhir/R4/mapping-language.html) (FML). Uitgevoerd door de [HL7 FHIR Validator](https://github.com/hapifhir/org.hl7.fhir.core).
 
-De mappings zijn per zib opgezet en herbruikbaar voor iedereen die van STU3/zib2017 naar R4/zib2020 moet, bijvoorbeeld voor MedMij-gegevensdiensten die nog STU3 leveren.
+Naast de FHIR-versie zetten de mappings waar nodig ook het profiel om, bijvoorbeeld van de Nictiz-profielen op zib2017 naar die op zib2020. De mappings zijn herbruikbaar voor iedereen die STU3-data als R4 nodig heeft, bijvoorbeeld van MedMij-gegevensdiensten die nog STU3 leveren.
 
-> **Status:** concept. De eerste toepassing is de gegevensdienst LaboratoryResults; andere zibs volgen.
+> **Status:** concept. De eerste toepassing is de gegevensdienst LaboratoryResults; andere resources en profielen volgen.
 
-## Ondersteunde zibs
+## Ondersteunde profielen
 
-| zib | Van (STU3, zib2017) | Naar (R4, zib2020) | Status |
+| Resource | Van (STU3) | Naar (R4) | Status |
 |---|---|---|---|
 | Patient | `nl-core-patient` | `nl-core-Patient` | in ontwikkeling |
-| Zorgverlener | `nl-core-practitioner` | `nl-core-HealthProfessional-Practitioner` | in ontwikkeling |
-| Zorgaanbieder | `nl-core-organization` | `nl-core-HealthcareProvider-Organization` | in ontwikkeling |
-| LaboratoriumUitslag | `zib-LaboratoryTestResult-Observation` | `nl-core-LaboratoryTestResult` | in ontwikkeling |
-| LaboratoriumUitslag (monster) | `zib-LaboratoryTestResult-Specimen` | `nl-core-LaboratoryTestResult.Specimen` | in ontwikkeling |
+| Practitioner | `nl-core-practitioner` | `nl-core-HealthProfessional-Practitioner` | in ontwikkeling |
+| Organization | `nl-core-organization` | `nl-core-HealthcareProvider-Organization` | in ontwikkeling |
+| Observation | `zib-LaboratoryTestResult-Observation` | `nl-core-LaboratoryTestResult` | in ontwikkeling |
+| Specimen | `zib-LaboratoryTestResult-Specimen` | `nl-core-LaboratoryTestResult.Specimen` | in ontwikkeling |
 
 ## Ontwerp
 
@@ -37,11 +37,11 @@ Resource-id's, `fullUrl`'s en `search.mode` blijven behouden, zodat referenties 
 
 | Laag | Map | Doet |
 |---|---|---|
-| Bundle | `maps/bundle/Bundle.map` | Neemt Bundle-velden over en stuurt elke entry naar de juiste zib-map: op resourcetype, en waar één resourcetype meerdere zibs bedient (zoals Observation) ook op profiel. |
-| zib | `maps/zibs/<Zib>.map` | Eén map per zib-profiel: profiel-URL's, extensies en zib-specifieke regels. |
-| Datatypes | `maps/datatypes/<Datatype>.map` | Gedeelde regels, bijvoorbeeld voor codesystemen, namen, adressen en identifiers. Geïmporteerd door de zib-maps. |
+| Bundle | `maps/Bundle.map` | Neemt Bundle-velden over en stuurt elke entry naar de juiste map: op resourcetype, en waar één resourcetype meerdere profielen kent (zoals Observation) ook op profiel. |
+| Resource | `maps/resources/<Resourcetype>/<Map>.map` | Eén map per resourcetype zonder profiel, of per profiel: de versieconversie plus profiel-URL's, extensies en profielspecifieke regels. |
+| Datatypes | `maps/datatypes/<Datatype>.map` | Gedeelde regels, bijvoorbeeld voor codesystemen, namen, adressen en identifiers. Geïmporteerd door de resource-maps. |
 
-Een nieuwe zib toevoegen is een nieuwe map in `maps/zibs/` plus een regel in de Bundle-map. Wat er inhoudelijk verandert tussen zib2017 en zib2020 staat per zib in de translatietabellen van Nictiz: [Zibtranslate](https://github.com/Nictiz/Zibtranslate).
+Een resource of profiel toevoegen is een nieuwe map in `maps/resources/` plus een regel in de Bundle-map. Voor profielen op basis van zibs staat wat er inhoudelijk verandert tussen zib2017 en zib2020 in de translatietabellen van Nictiz: [Zibtranslate](https://github.com/Nictiz/Zibtranslate).
 
 **Waarom een STU3-context.** De Validator draait met `-version 3.0`, zodat de invoer als echte STU3 wordt gelezen. Voor de doeltypes verwijzen de maps naar de R4-definities met versienummer (`http://hl7.org/fhir/4.0/StructureDefinition/...`). Die komen uit het HL7-package `hl7.fhir.xver.r3`.
 
@@ -51,8 +51,11 @@ Een nieuwe zib toevoegen is een nieuwe map in `maps/zibs/` plus een regel in de 
 
 ```
 maps/
-  bundle/            Bundle.map: routeert entries naar zib-maps
-  zibs/              één map per zib-profiel (Patient.map, LaboratoryTestResult.map, ...)
+  Bundle.map         routeert entries naar de resource-maps
+  resources/         per resourcetype een map, met één map per profiel
+    Observation/     LaboratoryTestResult.map, ...
+    Patient/         Patient.map
+    ...
   datatypes/         gedeelde regels (Coding.map, HumanName.map, Address.map, ...)
 tests/
   <gegevensdienst>/  per gegevensdienst, bijv. tests/LaboratoryResults/
@@ -65,7 +68,7 @@ docs/                ontwerp en architectuurplaat
 build/               gegenereerde StructureMaps (niet in Git)
 ```
 
-Naamgeving: zib-maps heten naar het R4-profiel zonder voorvoegsel (`nl-core-LaboratoryTestResult` → `LaboratoryTestResult.map`). De canonical van een map is `<basis>/StructureMap/<bestandsnaam zonder .map>`. Groepsnamen zijn uniek over alle maps.
+Naamgeving: een map voor een profiel heet naar het R4-profiel zonder voorvoegsel (`nl-core-LaboratoryTestResult` → `LaboratoryTestResult.map`); een map zonder profiel naar het resourcetype. De canonical van een map is `<basis>/StructureMap/<bestandsnaam zonder .map>`. Bestandsnamen en groepsnamen zijn uniek over alle maps.
 
 ## Gebruik
 
@@ -90,7 +93,7 @@ Per map: compileren in een R4-context en omzetten naar STU3-formaat.
 BASE=http://example.org/fhir/StructureMap   # canonical-basis van de maps
 V="java -jar validator_cli.jar"
 
-for f in maps/*/*.map; do
+for f in $(find maps -name '*.map'); do
   m=$(basename "$f" .map)
   $V compile $BASE/$m -version 4.0 -ig "$f" -output build/r4/$m.json
   $V to-version 3.0 build/r4/$m.json -version 4.0 -do-native -output build/r3/$m.json
