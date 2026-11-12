@@ -42,22 +42,10 @@ Aanpassingen ten opzichte van de bron:
 
 Verder is de inhoud ongewijzigd.
 
-Opnieuw afleiden, vanuit de hoofdmap van de repository:
-
-```bash
-T=conversies/r4-stu3/tests/LaboratoryResults
-python scripts/vul_datums.py 2026-11-12 /tmp/lab $T/bron/lu-blr-KWAL-*.xml
-for f in /tmp/lab/*.xml; do
-  java -Xmx1536m -jar validator_cli.jar convert "$f" -version 4.0 -tx n/a \
-    -output $T/input/$(basename "$f" .xml).json
-done
-python scripts/lab_r4_aanvullen.py $T/input/*.json
-```
-
 ## Validatie van `input/`
 
 ```bash
-java -Xmx1536m -jar validator_cli.jar $T/input/*.json -version 4.0 \
+java -Xmx1536m -jar validator_cli.jar conversies/r4-stu3/tests/LaboratoryResults/input/*.json -version 4.0 \
   -ig nictiz.fhir.nl.r4.labexchange#4.0.0-beta.2 -sct nl -display-issues-are-warnings
 ```
 
