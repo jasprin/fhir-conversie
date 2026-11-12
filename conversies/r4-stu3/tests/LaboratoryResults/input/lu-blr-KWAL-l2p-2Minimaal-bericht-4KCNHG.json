@@ -1,0 +1,493 @@
+{
+  "resourceType": "Bundle",
+  "id": "lu-blr-KWAL-l2p-2Minimaal-bericht-4KCNHG",
+  "type": "searchset",
+  "total": 1,
+  "link": [
+    {
+      "relation": "self",
+      "url": "http://dummy.nictiz.nl/dummyquery/"
+    }
+  ],
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:3b2964cf-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "3b2964cf-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/nl-core-LaboratoryTestResult"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:2.16.840.1.113883.2.4.3.11.999.25.4298.2",
+            "value": "55555"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://referentiemodel.nhg.org/tabellen/nhg-tabel-45-diagnostische-bepalingen",
+              "code": "111",
+              "display": "bilirubine totaal"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:3b296371-79e0-11f1-1076-020000000000",
+          "type": "Patient",
+          "display": "Patient, E. XXX_Doppen"
+        },
+        "effectiveDateTime": "2026-10-30",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/event-performerFunction",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                      "code": "PPRF",
+                      "display": "primary performer"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+                "valueCode": "unknown"
+              }
+            ]
+          },
+          {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/event-performerFunction",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                      "code": "RESP",
+                      "display": "responsible party"
+                    }
+                  ]
+                }
+              }
+            ],
+            "reference": "urn:uuid:3b29642f-79e0-11f1-1076-020000000000",
+            "type": "Organization",
+            "display": "Healthcare provider (organization), organisation-id in system"
+          }
+        ],
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "umol/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "umol/L"
+        }
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b296371-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "3b296371-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/nl-core-Patient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "http://fhir.nl/fhir/NamingSystem/bsn",
+            "value": "999900511"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "text": "E. XXX_Doppen",
+            "family": "XXX_Doppen",
+            "_family": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/humanname-own-name",
+                  "valueString": "XXX_Doppen"
+                }
+              ]
+            },
+            "given": [
+              "E."
+            ],
+            "_given": [
+              {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+                    "valueCode": "IN"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "gender": "male",
+        "_gender": {
+          "extension": [
+            {
+              "url": "http://nictiz.nl/fhir/StructureDefinition/ext-CodeSpecification",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender",
+                    "code": "M",
+                    "display": "Man"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "birthDate": "1963-10-24"
+      },
+      "search": {
+        "mode": "include"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b29642f-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "3b29642f-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/nl-core-HealthcareProvider-Organization"
+          ]
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://nictiz.nl/fhir/NamingSystem/organization-type",
+                "version": "2024-11-14T22:13:01",
+                "code": "L1",
+                "display": "Laboratorium"
+              }
+            ]
+          }
+        ],
+        "name": "Klinisch Chemisch Laboratorium 't Proefje"
+      },
+      "search": {
+        "mode": "include"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b2963e9-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "3b2963e9-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/nl-core-HealthcareProvider-Organization"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "http://fhir.nl/fhir/NamingSystem/ura",
+            "value": "00001111"
+          }
+        ],
+        "name": "Huisartsenpraktijk Pulver & Partners",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "099-12345678"
+          }
+        ],
+        "address": [
+          {
+            "extension": [
+              {
+                "url": "http://nictiz.nl/fhir/StructureDefinition/ext-AddressInformation.AddressType",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/v3-AddressUse",
+                      "code": "WP",
+                      "display": "Werkadres"
+                    }
+                  ]
+                }
+              }
+            ],
+            "use": "work",
+            "line": [
+              "Dorpstraat 1"
+            ],
+            "_line": [
+              {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
+                    "valueString": "Dorpstraat"
+                  },
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+                    "valueString": "1"
+                  }
+                ]
+              }
+            ],
+            "city": "Ons Dorp",
+            "postalCode": "1234AA"
+          }
+        ]
+      },
+      "search": {
+        "mode": "include"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b2963c1-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "3b2963c1-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/nl-core-HealthProfessional-Practitioner"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "http://fhir.nl/fhir/NamingSystem/agb-z",
+            "value": "00001111"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "text": "Peter van Pulver",
+            "family": "van Pulver",
+            "_family": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/humanname-own-prefix",
+                  "valueString": "van"
+                },
+                {
+                  "url": "http://hl7.org/fhir/StructureDefinition/humanname-own-name",
+                  "valueString": "Pulver"
+                }
+              ]
+            },
+            "given": [
+              "Peter"
+            ],
+            "_given": [
+              {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier",
+                    "valueCode": "BR"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "1645645000"
+          }
+        ]
+      },
+      "search": {
+        "mode": "include"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b296399-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "3b296399-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/nl-core-HealthProfessional-PractitionerRole"
+          ]
+        },
+        "practitioner": {
+          "reference": "urn:uuid:3b2963c1-79e0-11f1-1076-020000000000",
+          "type": "Practitioner",
+          "display": "Healthcare professional (person), Peter van Pulver"
+        },
+        "organization": {
+          "reference": "urn:uuid:3b2963e9-79e0-11f1-1076-020000000000",
+          "type": "Organization",
+          "display": "Healthcare provider (organization), Huisartsenpraktijk Pulver & Partners"
+        },
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "urn:oid:2.16.840.1.113883.2.4.6.7",
+                "code": "0101",
+                "display": "Huisartsen, niet nader gespecificeerd"
+              }
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "1645645000"
+          }
+        ]
+      },
+      "search": {
+        "mode": "include"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b29647f-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "3b29647f-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/lu-OrderData"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:2.16.840.1.113883.2.4.3.11.60.25.1.1",
+            "value": "AG01"
+          }
+        ],
+        "status": "completed",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "https://referentiemodel.nhg.org/tabellen/nhg-tabel-45-diagnostische-bepalingen",
+              "code": "111",
+              "display": "bilirubine totaal"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:3b296371-79e0-11f1-1076-020000000000",
+          "type": "Patient",
+          "display": "Patient, E. XXX_Doppen"
+        },
+        "authoredOn": "2026-10-29",
+        "requester": {
+          "reference": "urn:uuid:3b296399-79e0-11f1-1076-020000000000",
+          "type": "PractitionerRole",
+          "display": "Healthcare professional (role), Peter van Pulver, Huisartsen, niet nader gespecificeerd"
+        },
+        "reasonCode": [
+          {
+            "text": "Follow-up bij eerder verhoogde ALAT"
+          }
+        ],
+        "note": [
+          {
+            "text": "Eerder lichte stijging ALAT (54 U/L), geen geelzucht. Hercontrole op leverenzymen en bilirubine. Patiënt gebruikt sinds 3 maanden geen alcohol meer"
+          }
+        ]
+      },
+      "search": {
+        "mode": "include"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b2964a7-79e0-11f1-1076-020000000000",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "3b2964a7-79e0-11f1-1076-020000000000",
+        "meta": {
+          "profile": [
+            "http://nictiz.nl/fhir/StructureDefinition/lu-LaboratoryTestResult-DiagnosticReport"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:2.16.840.1.113883.2.4.3.11.60.25.1.1",
+            "value": "AG01"
+          }
+        ],
+        "basedOn": [
+          {
+            "reference": "urn:uuid:3b29647f-79e0-11f1-1076-020000000000",
+            "type": "ServiceRequest",
+            "display": "Huisartsenpraktijk Pulver & Partners"
+          }
+        ],
+        "status": "unknown",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                "code": "LAB",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "11502-2",
+              "display": "Laboratory report"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:3b296371-79e0-11f1-1076-020000000000",
+          "type": "Patient",
+          "display": "Patient, E. XXX_Doppen"
+        },
+        "effectiveDateTime": "2026-10-30",
+        "performer": [
+          {
+            "reference": "urn:uuid:3b29642f-79e0-11f1-1076-020000000000",
+            "type": "Organization",
+            "display": "Healthcare provider (organization), organisation-id in system"
+          }
+        ],
+        "result": [
+          {
+            "reference": "urn:uuid:3b2964cf-79e0-11f1-1076-020000000000",
+            "type": "Observation",
+            "display": "laboratorium_test"
+          }
+        ]
+      },
+      "search": {
+        "mode": "include"
+      }
+    }
+  ]
+}

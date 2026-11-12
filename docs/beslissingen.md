@@ -15,6 +15,7 @@ Status: **besloten**, **voorstel** (nog niet bevestigd) of **vervallen**.
 | [B07](#b07) | Eigen maps; de interversion-maps van HL7 als referentie | voorstel |
 | [B08](#b08) | Mappings eerst documenteren, dan bouwen | besloten |
 | [B09](#b09) | Testmateriaal: ongewijzigde bron plus afgeleide testberichten | besloten |
+| [B10](#b10) | R4 → STU3, LaboratoryResults: Lab2patient als bron, ServiceRequest valt voorlopig weg | besloten |
 
 ---
 
@@ -102,3 +103,14 @@ Status: **besloten**, **voorstel** (nog niet bevestigd) of **vervallen**.
 
 - **Keuze.** Per gegevensdienst staat het uitgangsmateriaal ongewijzigd in `tests/<gegevensdienst>/bron/`, met herkomst en licentie. De testberichten in `input/` zijn daaruit afgeleid en mogen worden aangepast; elke aanpassing staat in de README van de testset. Alleen synthetische data.
 - **Gevolg.** De mappingdocumenten geven per regel aan of de testset hem dekt. Wat het materiaal niet dekt, vraagt eigen synthetische voorbeelden.
+
+## B10
+
+**R4 → STU3, LaboratoryResults: Lab2patient als bron, ServiceRequest valt voorlopig weg** · besloten · 2026-11-12
+
+- **Aanleiding.** De bron levert R4; de MedMij-gegevensdienst [LaboratoryResults 2020.01](https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2020.01/FHIR_LaboratoryResults) verlangt STU3. Voor de bronkant is een R4-standaard nodig die dezelfde transactie beschrijft.
+- **Keuze.**
+  - Bron: [Lab2patient](https://informatiestandaarden.nictiz.nl/wiki/L2p:V2_FHIR_lab2patient) (`nictiz.fhir.nl.r4.labexchange` 4.0.0-beta.2), het beschikbaarstellen van laboratoriumresultaten aan de patiënt. Het testmateriaal komt uit de voorbeelden van Nictiz in [HL7-mappings](https://github.com/Nictiz/HL7-mappings/tree/master/ada_2_fhir-r4/lab/l2p-1.0.0).
+  - ServiceRequest (`lu-OrderData`) heeft geen tegenhanger in MedMij 2020.01 en valt bij de conversie weg, met de referenties ernaar.
+- **Alternatieven.** Het R4-materiaal in [Nictiz-testscripts](https://github.com/Nictiz/Nictiz-testscripts/tree/main/src/LaboratoryResults-3-0): niet gepubliceerd (alleen in `dev/`), testscripts uitgeschakeld, en de fixtures gebruiken extensies van een oudere beta.
+- **Open.** Of gegevens uit de aanvraag (zoals de aanvrager) toch in de Observation of het DiagnosticReport in STU3 moeten komen. Lab2patient is nog beta; een nieuwe versie kan het bronmateriaal veranderen.

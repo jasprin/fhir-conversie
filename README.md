@@ -118,7 +118,7 @@ Bij `compile` is het eerste argument de canonical van de map; het `.map`-bestand
 ### Converteren als bestand
 
 ```bash
-$V transform ${PREFIX}Bundle conversies/$R/tests/LaboratoryResults/input/bundle.json \
+$V transform ${PREFIX}Bundle conversies/$R/tests/LaboratoryResults/input/lu-blr-KWAL-l2p-1Maximaal-bericht-4KCNHG.json \
    -version 4.0 -ig hl7.fhir.xver.r4#1.2.0 -ig build/$R \
    -output bundle-stu3.json
 ```
